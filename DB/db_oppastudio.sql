@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2019 at 07:50 PM
+-- Generation Time: Aug 01, 2019 at 06:25 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -38,7 +38,8 @@ CREATE TABLE `t_admin` (
 
 INSERT INTO `t_admin` (`id_admin`, `nama_admin`, `password`) VALUES
 ('agam21', 'Agam Nugroho', '21232f297a57a5a743894a0e4a801fc3'),
-('ajay', 'Fajar Ramadan', '24bc50d85ad8fa9cda686145cf1f8aca');
+('ajay', 'Fajar Ramadan', '24bc50d85ad8fa9cda686145cf1f8aca'),
+('rahmat', 'Rahmat Syaparudin', '62c8ad0a15d9d1ca38d5dee762a16e01');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,7 @@ CREATE TABLE `t_member` (
 --
 
 INSERT INTO `t_member` (`id_member`, `nama_member`, `no_telepon`, `alamat`, `point`) VALUES
-(1, 'Fuad Asfrilly', '081321212121', 'Jl. Cicadas No 99', 0);
+(1, 'Fuad Asfrilly2', '0813212121212', 'Jl. Cicadas No 9921', 0);
 
 -- --------------------------------------------------------
 
@@ -104,13 +105,53 @@ CREATE TABLE `t_operasional` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_products`
+--
+
+CREATE TABLE `t_products` (
+  `id_product` int(11) NOT NULL,
+  `kode_product` varchar(10) NOT NULL,
+  `id_promo` int(11) DEFAULT NULL,
+  `nama_product` varchar(255) NOT NULL,
+  `harga_product` float NOT NULL DEFAULT '0',
+  `kapasitas` int(11) DEFAULT NULL,
+  `keterangan` text,
+  `status_product` int(1) NOT NULL DEFAULT '1',
+  `tgl_pembuatan` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_products`
+--
+
+INSERT INTO `t_products` (`id_product`, `kode_product`, `id_promo`, `nama_product`, `harga_product`, `kapasitas`, `keterangan`, `status_product`, `tgl_pembuatan`) VALUES
+(1, 'BHGFDERH', NULL, 'Foto Pre-Wedding', 800000, 2, NULL, 1, '2019-08-01 21:57:10'),
+(2, 'L9BJ2GVQ', NULL, 'Foto Pre-WED', 2000000, 0, 'asasas', 1, '2019-08-01 22:39:47');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_promo`
 --
 
 CREATE TABLE `t_promo` (
   `id_promo` varchar(8) NOT NULL,
-  `nama_promo` varchar(20) NOT NULL
+  `kode_promo` varchar(20) NOT NULL,
+  `nama_promo` varchar(20) NOT NULL,
+  `potongan_harga` float NOT NULL DEFAULT '0',
+  `tgl_mulai` date NOT NULL,
+  `tgl_akhir` date NOT NULL,
+  `waktu_mulai` time DEFAULT NULL,
+  `waktu_akhir` time DEFAULT NULL,
+  `status_promo` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_promo`
+--
+
+INSERT INTO `t_promo` (`id_promo`, `kode_promo`, `nama_promo`, `potongan_harga`, `tgl_mulai`, `tgl_akhir`, `waktu_mulai`, `waktu_akhir`, `status_promo`) VALUES
+('', 'ASASWSDS', 'BUY 1 GET 1', 50000, '2019-08-01', '2019-08-31', '08:00:00', '14:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -154,6 +195,13 @@ ALTER TABLE `t_member`
   ADD PRIMARY KEY (`id_member`);
 
 --
+-- Indexes for table `t_products`
+--
+ALTER TABLE `t_products`
+  ADD PRIMARY KEY (`id_product`),
+  ADD UNIQUE KEY `kode_product` (`kode_product`);
+
+--
 -- Indexes for table `t_promo`
 --
 ALTER TABLE `t_promo`
@@ -173,7 +221,12 @@ ALTER TABLE `t_transaksi`
 -- AUTO_INCREMENT for table `t_member`
 --
 ALTER TABLE `t_member`
-  MODIFY `id_member` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_member` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `t_products`
+--
+ALTER TABLE `t_products`
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
